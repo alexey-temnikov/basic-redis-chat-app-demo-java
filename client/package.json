@@ -11,10 +11,15 @@
     "react-bootstrap": "^1.4.0",
     "react-bootstrap-icons": "^1.1.0",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
+    "react-scripts": "5.0.1",
     "socket.io-client": "^3.0.4"
   },
+  "resolutions": {
+    "postcss-safe-parser": "^7.0.1",
+    "postcss": "^8.5.0"
+  },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build"
   },

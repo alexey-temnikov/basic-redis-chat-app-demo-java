@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -73,6 +74,12 @@ public class RedisAppConfig {
         if (password != null) {
             config.setPassword(password);
         }
-        return new LettuceConnectionFactory(config);
+
+        LettuceClientConfiguration client = LettuceClientConfiguration.builder()
+                .useSsl()                                     // <‑‑ TLS on
+                .disablePeerVerification()                 // if you need to skip hostname check
+                .build();
+
+        return new LettuceConnectionFactory(config, client);
     }
 }
